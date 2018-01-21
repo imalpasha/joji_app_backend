@@ -11,25 +11,25 @@ class BookController extends Controller
    public function test(Request $request)
 	{
 			//image from app (android)	
-			$binary=base64_decode($request->input('image1'));
-			$androidImage =  time().'_logo.jpg';
+			//$binary=base64_decode($request->input('image1'));
+			//$androidImage =  time().'_logo.jpg';
 			
 			//check if image null
-			if($request['image1'] == null){
-					return response()->json(array(
-					'status' => "N",
-				));
-			}
+			//if($request['image1'] == null){
+			//		return response()->json(array(
+			//		'status' => "N",
+			//	));
+			//}
 			
 			//path to image
 			
-			$file = fopen('image/'.$androidImage, 'wb');
-			fwrite($file, $binary);
-			fclose($file);
+			//$file = fopen('image/'.$androidImage, 'wb');
+			//fwrite($file, $binary);
+			//fclose($file);
 			
 			//rewrite - path (image located at blog/public/image/)
-			$androidImage = 'image/'.$androidImage;
-			//$androidImage = 'image/logo2.jpg';
+			//$androidImage = 'image/'.$androidImage;
+			$androidImage = 'image/logo2.jpg';
 
 		
 			//get image from db.. and compare with recently uploaded image.
@@ -37,7 +37,8 @@ class BookController extends Controller
 			
 			//get the highest only
 			$high = 0;
-			
+			$dbPosition = 99;
+
 			for($x = 0 ; $x < count($allImage) ; $x++ ){
  
 				$accuracy = $this->compareImages('image/'.$allImage[$x]->logo_path,$androidImage,0.5);
@@ -48,6 +49,14 @@ class BookController extends Controller
 				}
 				
 				
+			}
+			
+			if($dbPosition == 99){
+					
+					return response()->json(array(
+					'status' => "N",
+				));
+		
 			}
 						
 			return response()->json(array(
