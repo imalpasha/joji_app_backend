@@ -11,25 +11,25 @@ class BookController extends Controller
    public function test(Request $request)
 	{
 			//image from app (android)	
-			//$binary=base64_decode($request->input('image1'));
-			//$androidImage =  time().'_logo.jpg';
+			$binary=base64_decode($request->input('image1'));
+			$androidImage =  time().'_logo.jpg';
 			
 			//check if image null
-			//if($request['image1'] == null){
-			//		return response()->json(array(
-			//		'status' => "N",
-			//	));
-			//}
+			if($request['image1'] == null){
+					return response()->json(array(
+					'status' => "N",
+				));
+			}
 			
 			//path to image
 			
-			//$file = fopen('image/'.$androidImage, 'wb');
-			//fwrite($file, $binary);
-			//fclose($file);
+			$file = fopen('image/'.$androidImage, 'wb');
+			fwrite($file, $binary);
+			fclose($file);
 			
 			//rewrite - path (image located at blog/public/image/)
-			//$androidImage = 'image/'.$androidImage;
-			$androidImage = 'image/logo2.jpg';
+			$androidImage = 'image/'.$androidImage;
+			//ndroidImage = 'image/logo2.jpg';
 
 		
 			//get image from db.. and compare with recently uploaded image.
