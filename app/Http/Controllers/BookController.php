@@ -39,7 +39,7 @@ class BookController extends Controller
 			$high = 0;
 			
 			for($x = 0 ; $x < count($allImage) ; $x++ ){
-				echo "</br>";
+ 
 				$accuracy = $this->compareImages('image/'.$allImage[$x]->logo_path,$androidImage,0.5);
 				
 				if($high < $accuracy){
